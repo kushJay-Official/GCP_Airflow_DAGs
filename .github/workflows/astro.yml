@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'dags/**'
+env:
+  ASTRO_API_TOKEN: ${{ secrets.ASTRONOMER_API_TOKEN }}
+
 
 jobs:
   deploy:
@@ -15,20 +18,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Astronomer CLI (latest v2)
-        run: |
-          curl -sSL install.astronomer.io | sudo bash -s -- v1.41.0
-          astro version
-
-      - name: Authenticate to Astronomer
-        run: |
-          astro cloud login --token ${{ secrets.ASTRONOMER_API_TOKEN }}
-
       - name: Setup GCP Credentials
         run: |
           echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 -d > gcp-creds.json
           export GOOGLE_APPLICATION_CREDENTIALS=gcp-creds.json
 
-      - name: Deploy to Astronomer
-        run: |
-          astro deploy --workspace-id cm976hkwu1idk01mua2xzpm0h
+      - name: Deploy to Astro
+        uses: astronomer/deploy-action@v0.10.0
+        with:
+          deployment-id: cm976i5wt1ilv01ma9uait7x4
