@@ -21,7 +21,7 @@ jobs:
 
       - name: Authenticate to Astronomer
         run: |
-          astro login --token ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro login --t ${{ secrets.ASTRONOMER_API_TOKEN }}
           astro config set --name default --org-id cm976hkwu1idk01mua2xzpm0h
 
       - name: Setup GCP Credentials
