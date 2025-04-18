@@ -15,9 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Astronomer CLI v2
+      - name: Install Astronomer CLI (latest v2)
         run: |
-          curl -sSfL https://raw.githubusercontent.com/astronomer/astro-cli/main/install.sh | sh
+          curl -sSf https://install.astronomer.io | sh
           astro version
 
       - name: Authenticate to Astronomer
