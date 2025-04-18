@@ -22,7 +22,7 @@ jobs:
 
       - name: Authenticate to Astronomer
         run: |
-          astro login -t ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro cloud login -token ${{ secrets.ASTRONOMER_API_TOKEN }}
 
       - name: Setup GCP Credentials
         run: |
