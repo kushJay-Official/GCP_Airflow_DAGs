@@ -21,7 +21,8 @@ jobs:
 
       - name: Authenticate to Astronomer
         run: |
-          astro auth login https://cloud.astronomer.io --token ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro cloud login --token ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro cloud config set --name default --org-id cm976hkwu1idk01mua2xzpm0h
 
       - name: Setup GCP Credentials
         run: |
