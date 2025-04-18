@@ -1,0 +1,29 @@
+name: Deploy DAGs to Astronomer
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dags/**'
+env:
+  ASTRO_API_TOKEN: ${{ secrets.ASTRONOMER_API_TOKEN }}
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup GCP Credentials
+        run: |
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 -d > gcp-creds.json
+          export GOOGLE_APPLICATION_CREDENTIALS=gcp-creds.json
+
+      - name: Deploy to Astro
+        uses: astronomer/deploy-action@v0.10.0
+        with:
+          deployment-id: cm976i5wt1ilv01ma9uait7x4
