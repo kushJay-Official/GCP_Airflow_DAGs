@@ -21,7 +21,7 @@ jobs:
 
       - name: Authenticate to Astronomer
         run: |
-          astro auth login <your-astro-deployment-url> --token ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro auth login https://cloud.astronomer.io --token ${{ secrets.ASTRONOMER_API_TOKEN }}
 
       - name: Setup GCP Credentials
         run: |
