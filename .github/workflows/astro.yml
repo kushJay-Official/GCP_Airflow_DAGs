@@ -15,15 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Astronomer CLI v2
+      - name: Setup Astronomer CLI
         run: |
-          curl -sSfL https://raw.githubusercontent.com/astronomer/astro-cli/main/install.sh | sh
-          astro version
+          curl -sSL https://install.astronomer.io | sudo bash
 
       - name: Authenticate to Astronomer
         run: |
-          astro cloud login --token ${{ secrets.ASTRONOMER_API_TOKEN }}
-          astro cloud config set --name default --org-id cm976hkwu1idk01mua2xzpm0h
+          astro login --token ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro config set --name default --org-id cm976hkwu1idk01mua2xzpm0h
 
       - name: Setup GCP Credentials
         run: |
