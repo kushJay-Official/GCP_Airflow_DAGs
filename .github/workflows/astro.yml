@@ -17,12 +17,12 @@ jobs:
 
       - name: Install Astronomer CLI (latest v2)
         run: |
-          curl -sSf https://install.astronomer.io | sh
+          curl -sSL install.astronomer.io | sudo bash -s -- v1.33.2
           astro version
 
       - name: Authenticate to Astronomer
         run: |
-          astro cloud login --token ${{ secrets.ASTRONOMER_API_TOKEN }}
+          astro login -t ${{ secrets.ASTRONOMER_API_TOKEN }}
 
       - name: Setup GCP Credentials
         run: |
